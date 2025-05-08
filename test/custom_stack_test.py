@@ -34,3 +34,25 @@ def test_push_and_pop_sequence():
     assert stack.pop() == 'b'
     assert stack.top() == 'a'
     assert stack.size() == 1
+
+# ----------------------------------------------- #
+
+def test_sort_stack_with_six_numbers():
+    stack = CustomStack(6)
+    numbers = [45, 2, 33, 17, 8, 50]
+
+    for n in numbers:
+        stack.push(n)
+
+    sorter = NumberAscOrder()
+    result = sorter.sort(stack)
+
+    assert result == sorted(numbers)
+    assert stack.is_empty()
+
+def test_sort_empty_stack_raises_error():
+    stack = CustomStack(6)
+    sorter = NumberAscOrder()
+
+    with pytest.raises(ValueError, match="Pilha está vazia"):
+        sorter.sort(stack)
